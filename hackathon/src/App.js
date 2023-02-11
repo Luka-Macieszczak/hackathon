@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ResultCard from './components/ResultCard';
 import logo from './logo.svg';
 import './App.css';
@@ -11,25 +11,35 @@ function App() {
 
     const getProduct = async () => {
         const requestOptions = {
-            method: 'POST',
+            method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: product,
-                country: 'Canada'
-            })
 
         }
 
-        //let res = await fetch('http://localhost:4001/ebay', requestOptions)
-        // let json = await res.json();
-        console.log(tmp)
-        setData(tmp)
+        let res = await fetch('http://localhost:4001/getebay', requestOptions)
+        let json = await res.json();
+        if(json.body === 'not loaded'){
+            setTimeout(() => {
+                getProduct()
+            }, 1000)
+        }
+        else{
+            setData(json)
+            console.log(json)
+        }
+        
+        
 
     }
 
     const handleInputProduct = (event) => {
         setProduct(event.target.value)
     }
+
+    useEffect(() => {
+        getProduct()
+    }, [])
+
     return (
         <div className="App">
             <h1>Type in something</h1>

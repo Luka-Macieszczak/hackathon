@@ -7,6 +7,9 @@ const dotenv = require('dotenv');
 var bodyParser = require("body-parser");
 const axios = require("axios");
 
+
+let ebayRes;
+
 var http = require('http');
 const { json } = require("express/lib/response");
 const c = require("colour");
@@ -40,7 +43,8 @@ app.get('/test', (req, res) => {
         country: country to look for products in
     }
 */
-app.post('/ebay', (req, res) => {
+app.post('/setebay', (req, res) => {
+    console.log(req.body)
     const options = {
         method: 'GET',
         url: 'https://ebay-data-scraper.p.rapidapi.com/products',
@@ -53,10 +57,22 @@ app.post('/ebay', (req, res) => {
       
     axios.request(options).then( (response) => {
         console.log(response.data)
-        res.send(JSON.stringify(response.data))
+        ebayRes = response.data
+        res.send('success')
     }).catch((error) => {
         console.error(error)
     })
+})
+
+app.get('/getebay', (req, res) => {
+    if(ebayRes){
+        console.log('res')
+        res.send(JSON.stringify(ebayRes))
+    }
+    else {
+        console.log('polling')
+        res.send(JSON.stringify({body: 'not loaded'}))
+    }
 })
 
 httpServer.listen(Constants.PORT, () => {
