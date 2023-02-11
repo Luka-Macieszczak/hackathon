@@ -14,26 +14,11 @@ function App() {
       let res = await fetch('http://localhost:4001/test', requestOptions)
       let json = await res.json();
       console.log(json)
+      setBob(json.test)
   }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {bob} <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={() => getBob()}>Test</button>
-        <div>
-        </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Bob
-        </a>
-      </header>
+      <h1>Hello</h1>
     </div>
   );
 }

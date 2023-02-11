@@ -1,7 +1,6 @@
 {
   "short_name": "Extension",
   "name": "Ebay Price Extension",
-  "version": "2.0",
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,6 +21,7 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
+  "background_color": "#ffffff",
   "manifest_version": 3,
   "content_scripts": [
     {
