@@ -4,10 +4,16 @@ import './App.css';
 
 function App() {
   const [bob, setBob] = useState('');
-  const getBob = async () => {
-      let res = await (await fetch('http:localhost:4001/test')).text()
-      setBob(res);
+  console.log('test')
 
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  }
+  const getBob = async () => {
+      let res = await fetch('http://localhost:4001/test', requestOptions)
+      let json = await res.json();
+      console.log(json)
   }
   return (
     <div className="App">
