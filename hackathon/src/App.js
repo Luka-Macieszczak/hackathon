@@ -3,23 +3,39 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [bob, setBob] = useState('');
-  console.log('test')
+  const [data, setData] = useState({})
+  const [product, setProduct] = useState('')
 
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  }
-  const getBob = async () => {
-      let res = await fetch('http://localhost:4001/test', requestOptions)
+  
+  const getProduct = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: product,
+        country: 'Canada'
+    })
+      
+    }
+
+      let res = await fetch('http://localhost:4001/ebay', requestOptions)
       let json = await res.json();
       console.log(json)
-      setBob(json.test)
+      setData(json)
+      
+  }
+
+  const handleInputProduct = (event) => {
+    setProduct(event.target.value)
   }
   return (
     <div className="App">
-      <h1>Hello {bob}</h1>
-      <button onClick={() => getBob()}></button>
+      <h1>Type in something</h1>
+      <input onChange={handleInputProduct} type='text'></input>
+      <button onClick={() => getProduct()}>Get Data</button>
+      {Object.keys(data).map((key) => {
+        return <div >{JSON.stringify(data[key])}</div>
+      })}
     </div>
   );
 }
