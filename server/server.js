@@ -6,6 +6,7 @@ const Constants = require('./Constants');
 const dotenv = require('dotenv');
 var bodyParser = require("body-parser");
 const axios = require("axios");
+const getAmazon = require("./selenium");
 
 
 let ebayRes;
@@ -39,34 +40,39 @@ app.get('/test', (req, res) => {
 
 /*
     req.body: {
-        name: name of product
+        url: url of product on amazon
         country: country to look for products in
     }
 */
 app.post('/setebay', (req, res) => {
     console.log(req.body)
-    const options = {
-        method: 'GET',
-        url: 'https://ebay-data-scraper.p.rapidapi.com/products',
-        params: {page_number: '1', product_name: req.body.name, country: req.body.country},
-        headers: {
-          'X-RapidAPI-Key': process.env.API_KEY,
-          'X-RapidAPI-Host': 'ebay-data-scraper.p.rapidapi.com'
-        }
-      };
-      
-    axios.request(options).then( (response) => {
-        console.log(response.data)
-        ebayRes = response.data
-        res.send('success')
-    }).catch((error) => {
-        console.error(error)
-    })
+
+    getAmazon(req.body.url).then((name, price) => {
+        const options = {
+            method: 'GET',
+            url: 'https://ebay-data-scraper.p.rapidapi.com/products',
+            params: {page_number: '1', product_name: name, country: req.body.country},
+            headers: {
+            'X-RapidAPI-Key': process.env.API_KEY,
+            'X-RapidAPI-Host': 'ebay-data-scraper.p.rapidapi.com'
+            }
+        };
+        
+        axios.request(options).then( (response) => {
+            console.log(response.data)
+            ebayRes = response.data
+            ebayRes.amazonPrice = price
+            res.send('success')
+        }).catch((error) => {
+            console.error(error)
+        })
+        })
 })
 
 app.get('/getebay', (req, res) => {
     if(ebayRes){
         console.log('res')
+        console.log(ebayRes)
         res.send(JSON.stringify(ebayRes))
     }
     else {
