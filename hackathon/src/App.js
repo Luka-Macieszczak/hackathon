@@ -36,7 +36,7 @@ function App() {
             <input onChange={handleInputProduct} type='text'></input>
             <button onClick={() => getProduct()}>Get Data</button>
             {Object.keys(data).map((key) => {
-                return <ResultCard price={data[key].price} url={data[key].thumbnail} key={data[key].product_id} name={data[key].name}/>
+                return <ResultCard url={data[key].link} price={data[key].price} image={data[key].thumbnail} key={data[key].product_id} name={data[key].name}/>
             })}
         </div>
     );

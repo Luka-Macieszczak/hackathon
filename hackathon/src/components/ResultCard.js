@@ -1,12 +1,17 @@
 import '../App.css';
 
 const ResultCard = (props) => {
+    const onClickHandler = () => {
+        window.open(props.url, '_blank').focus();
+    }
+
     return(
         <div className="result">
-            <img src={props.url} />
+            <img src={props.image} />
             <div className='result-info'>
                 <h4>{props.name}</h4>
-                <h6>{props.price}</h6>
+                <h5>{props.price}</h5>
+                <button onClick={() => onClickHandler()} className='btn'>See Listing</button>
             </div>
         </div>
     )
