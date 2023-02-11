@@ -5,7 +5,7 @@ const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-        name: title,
+        url: window.location.href,
         country: 'Canada'
     })
 }

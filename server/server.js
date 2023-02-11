@@ -47,11 +47,11 @@ app.get('/test', (req, res) => {
 app.post('/setebay', (req, res) => {
     console.log(req.body)
 
-    getAmazon(req.body.url).then((name, price) => {
+    getAmazon(req.body.url).then((amazonRes) => {
         const options = {
             method: 'GET',
             url: 'https://ebay-data-scraper.p.rapidapi.com/products',
-            params: {page_number: '1', product_name: name, country: req.body.country},
+            params: {page_number: '1', product_name: amazonRes[0], country: req.body.country},
             headers: {
             'X-RapidAPI-Key': process.env.API_KEY,
             'X-RapidAPI-Host': 'ebay-data-scraper.p.rapidapi.com'
@@ -61,7 +61,7 @@ app.post('/setebay', (req, res) => {
         axios.request(options).then( (response) => {
             console.log(response.data)
             ebayRes = response.data
-            ebayRes.amazonPrice = price
+            ebayRes.amazonPrice = amazonRes[1]
             res.send('success')
         }).catch((error) => {
             console.error(error)
