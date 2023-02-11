@@ -4,6 +4,71 @@
     width: 500px;
 }
 
+body {
+	background-image: linear-gradient(45deg, #7175da, #9790F2);
+	font-family: 'Muli', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+}
+
 .card-container {
-    
+	
+}
+
+.result {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	margin: 20px;
+	overflow: hidden;
+	width: 700px;
+}
+
+.result h2 {
+	letter-spacing: 1px;
+	
+}
+.result-img {
+    margin: 10px 0;
+}
+.result-preview {
+	background-color: #2A265F;
+	color: #fff;
+	padding: 30px;
+	max-width: 250px;
+}
+
+.result-info {
+	padding: 40px;
+	position: relative;
+	width: 100%;
+}
+
+.result-info h4 {
+    top: 30px;
+}
+
+.result-info h6 {
+    color: #00d142;
+    margin-left: 150px;
+}
+
+.btn {
+	background-color: #2A265F;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 12px 25px;
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	letter-spacing: 1px;
 }

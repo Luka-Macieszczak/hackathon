@@ -2,9 +2,12 @@ import '../App.css';
 
 const ResultCard = (props) => {
     return(
-        <div className="card-container">
+        <div className="result">
             <img src={props.url} />
-            <div>{props.name}</div>
+            <div className='result-info'>
+                <h4>{props.name}</h4>
+                <h6>{props.price}</h6>
+            </div>
         </div>
     )
 }
