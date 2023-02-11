@@ -21,7 +21,7 @@ function App() {
         }
 
         //let res = await fetch('http://localhost:4001/ebay', requestOptions)
-        //let json = await res.json();
+        // let json = await res.json();
         console.log(tmp)
         setData(tmp)
 
