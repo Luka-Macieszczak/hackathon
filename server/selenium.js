@@ -17,7 +17,8 @@ async function getAmazon(url) {
         .build();
     await driver.get(url);
     let element = await driver.findElement(By.id('productTitle'));
-    let price = await driver.findElement(By.xpath('//*[@id="priceblock_ourprice"]'));
+    //find price by xpath id
+    let price = await driver.findElement(By.xpath('//*[@id="price_inside_buybox"]'));
 
     let productName = await element.getText();
     let productPrice = await price.getText();
