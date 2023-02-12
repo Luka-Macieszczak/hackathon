@@ -18,5 +18,3 @@ fetch('http://localhost:4001/setebay', requestOptions)
             }
         })
     })
-
-
