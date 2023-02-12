@@ -27,9 +27,6 @@ async function getAmazon(url) {
     let productName = await element.getText();
     let productPrice = await price.getText();
 
-    console.log("Product: " + productName);
-    console.log("Price: " + productPrice);
-
     return [productName, productPrice]
 
 }
