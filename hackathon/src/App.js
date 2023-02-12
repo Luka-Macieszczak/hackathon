@@ -36,6 +36,7 @@ function App() {
 
     return (
         <div className="App">
+            <h2>bandit.</h2>
             {Object.keys(data).map((key) => {
                 return <ResultCard url={data[key].link} price={data[key].price} image={data[key].thumbnail} key={data[key].product_id} name={data[key].name}/>
             })}
